@@ -6,20 +6,34 @@ int CALLBACK WinMain(
 	LPSTR     lpCmdLine,
 	int       nCmdShow)
 {
-	Window wnd(800, 300, "Donkey Fart Box");
+	try {
+		Window wnd(800, 300, "Donkey Fart Box");
 
-	MSG msg;
-	BOOL gResult;
-	while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
-	{
-		// TranslateMessage will post auxilliary WM_CHAR messages from key msgs
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		MSG msg;
+		BOOL gResult;
+		while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
+		{
+			// TranslateMessage will post auxilliary WM_CHAR messages from key msgs
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		if (gResult == -1)
+		{
+			throw CHWND_LAST_EXCEPT();
+		}
+		// wParam here is the value passed to PostQuitMessage
+		return msg.wParam;
 	}
-	if (gResult == -1)
-	{
-		return -1;
+	catch (const ChiliException& e) {
+		MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
 	}
-	// wParam here is the value passed to PostQuitMessage
-	return msg.wParam;
+	catch (const std::exception& e)
+	{
+		MessageBox(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
+	}
+	catch (...)
+	{
+		MessageBox(nullptr, "No details available", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
+	}
+	return -1;
 }
