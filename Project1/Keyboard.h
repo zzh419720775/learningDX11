@@ -45,7 +45,7 @@ public:
 
 	//char event stuff
 	char ReadChar() noexcept;
-	bool CharIsEmpty() noexcept;
+	bool CharIsEmpty() const noexcept;
 	void FlushChar() noexcept;
 	void Flush() noexcept;
 	// autorepeat control
