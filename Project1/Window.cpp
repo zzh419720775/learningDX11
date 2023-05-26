@@ -60,6 +60,7 @@ Window::Window(int width, int height, const char* name) noexcept
 		CW_USEDEFAULT, CW_USEDEFAULT, wr.right - wr.left, wr.bottom - wr.top, nullptr, nullptr, WindowClass::GetInstance(), this);
 	//show window
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
+	pGfx = std::make_unique<Graphics>(hWnd);
 }
 
 Window::~Window() {
@@ -72,6 +73,30 @@ void Window::SetTitle(const std::string& title)
 	{
 		throw CHWND_LAST_EXCEPT();
 	}
+}
+
+std::optional<int> Window::ProcessMessages()
+{
+	MSG msg;
+	//while queue has messages, remove and dispatch them(but do not block on empty queue)
+	while ( PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+	{
+		//check for quit becaust peekMessages does not signal this via return val
+		if (msg.message == WM_QUIT) {
+			// return optional wrapping int (arg to PostQuitMessage is in wparam) signals quit
+			return (int)msg.wParam;
+		}
+		// TranslateMessage will post auxilliary WM_CHAR messages from key msgs
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return {};
+}
+
+Graphics& Window::Gfx()
+{
+	return *pGfx;
 }
 
 LRESULT CALLBACK Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
@@ -132,8 +157,29 @@ LRESULT CALLBACK Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 
 		/************* MOUSE MESSAGES ****************/
 	case WM_MOUSEMOVE: {
-		POINTS pt = MAKEPOINTS(lParam);
-		mouse.OnMouseMove(pt.x, pt.y);
+		const POINTS pt = MAKEPOINTS(lParam);
+		// in client region -> log move, and log enter + capture mouse (if not previously in window)
+		if (pt.x >= 0 && pt.x < width && pt.y >= 0 && pt.y < height) {
+			mouse.OnMouseMove(pt.x, pt.y);
+			if (!mouse.IsInWindow()) {
+				SetCapture(hWnd);
+				mouse.OnMouseEnter();
+			}
+		}
+		// not in client -> log move / maintain capture if button down
+		else 
+		{
+			if (wParam & (MK_LBUTTON | MK_RBUTTON)) {
+				mouse.OnMouseMove(pt.x, pt.y);
+			}
+			// button up -> release capture / log event for leaving
+			else 
+			{
+				ReleaseCapture();
+				mouse.OnMouseLeave();
+			}
+		}
+		break;
 	}
 	case WM_LBUTTONDOWN:
 	{
@@ -151,25 +197,31 @@ LRESULT CALLBACK Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 	{
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftReleased(pt.x, pt.y);
+		// release mouse if outside of window
+		if (pt.x < 0 || pt.x >= width || pt.y < 0 || pt.y >= height)
+		{
+			ReleaseCapture();
+			mouse.OnMouseLeave();
+		}
 		break;
 	}
 	case WM_RBUTTONUP:
 	{
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnRightReleased(pt.x, pt.y);
+		// release mouse if outside of window
+		if (pt.x < 0 || pt.x >= width || pt.y < 0 || pt.y >= height)
+		{
+			ReleaseCapture();
+			mouse.OnMouseLeave();
+		}
 		break;
 	}
 	case WM_MOUSEWHEEL:
 	{
 		const POINTS pt = MAKEPOINTS(lParam);
-		if (GET_WHEEL_DELTA_WPARAM(wParam) > 0)
-		{
-			mouse.OnWheelUp(pt.x, pt.y);
-		}
-		else if (GET_WHEEL_DELTA_WPARAM(wParam) < 0)
-		{
-			mouse.OnWheelDown(pt.x, pt.y);
-		}
+		const int delta = GET_WHEEL_DELTA_WPARAM(wParam);
+		mouse.OnWheelDelta(pt.x, pt.y, delta);
 		break;
 	}
 	/************** END MOUSE MESSAGES **************/

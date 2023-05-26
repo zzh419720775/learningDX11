@@ -1,4 +1,5 @@
-#include "Window.h"
+#include "App.h"
+#include <sstream>
 
 int CALLBACK WinMain(
 	HINSTANCE hInstance,
@@ -7,22 +8,7 @@ int CALLBACK WinMain(
 	int       nCmdShow)
 {
 	try {
-		Window wnd(800, 300, "Donkey Fart Box");
-
-		MSG msg;
-		BOOL gResult;
-		while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
-		{
-			// TranslateMessage will post auxilliary WM_CHAR messages from key msgs
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		if (gResult == -1)
-		{
-			throw CHWND_LAST_EXCEPT();
-		}
-		// wParam here is the value passed to PostQuitMessage
-		return msg.wParam;
+		return App{}.Go();
 	}
 	catch (const ChiliException& e) {
 		MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
