@@ -21,7 +21,7 @@ Window::WindowClass::WindowClass() noexcept
 	wc.lpszMenuName = nullptr;
 	wc.lpszClassName = GetName();
 	wc.hIconSm = static_cast<HICON>(LoadImage(GetInstance(), MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 16, 16, 0));
-	RegisterClassEx(&wc);0
+	RegisterClassEx(&wc);
 }
 
 Window::WindowClass::~WindowClass() 
