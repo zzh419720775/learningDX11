@@ -1,6 +1,7 @@
 #pragma once
 #include <queue>
 #include <bitset>
+#include <optional>
 
 class Keyboard {
 	friend class Window;
@@ -39,12 +40,12 @@ public:
 
 	//key event stuff
 	bool KeyIsPressed(unsigned char keyCode) const noexcept;
-	Event ReadKey() noexcept;
+	std::optional<Event> ReadKey() noexcept;
 	bool KeyIsEmpty() const noexcept;
 	void FlushKey() noexcept;
 
 	//char event stuff
-	char ReadChar() noexcept;
+	std::optional<char> ReadChar() noexcept;
 	bool CharIsEmpty() const noexcept;
 	void FlushChar() noexcept;
 	void Flush() noexcept;
