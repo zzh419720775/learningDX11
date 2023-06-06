@@ -16,6 +16,24 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{9374f3f4-c592-44bc-b8c9-c219e466b3e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Bindable">
+      <UniqueIdentifier>{11a483a9-c02b-4dbb-baf7-7b03b45bab6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Drawable">
+      <UniqueIdentifier>{6bd67c0b-fe3b-4044-be5b-b6b156942ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Macros">
+      <UniqueIdentifier>{4b097cdd-c127-4aac-bb74-af0dcc190f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Bindable">
+      <UniqueIdentifier>{522d4c03-86bb-4d9c-975f-82bd469d3ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Drawable">
+      <UniqueIdentifier>{4b581f6a-5ee0-405c-8224-f4570b56ff61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Macros">
+      <UniqueIdentifier>{ff4e19de-d1b0-4fb5-a4e4-22d7b6c6f921}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -53,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="DxgiInfoManager.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Bindable.cpp">
+      <Filter>源文件\Bindable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +113,15 @@
     <ClInclude Include="DxgiInfoManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="WindowsThrowMacros.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsThrowMacros.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Bindable.h">
+      <Filter>头文件\Bindable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
@@ -116,6 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
