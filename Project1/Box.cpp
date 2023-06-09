@@ -2,6 +2,10 @@
 #include "BindableBase.h"
 #include "GraphicsThrowMacros.h"
 #include "Sphere.h"
+#include "Plane.h"
+#include "Cube.h"
+#include "Cone.h"
+#include "Prism.h"
 
 Box::Box(Graphics& gfx, 
 	std::mt19937& rng,
@@ -28,7 +32,7 @@ Box::Box(Graphics& gfx,
 			dx::XMFLOAT3 pos;
 		};
 
-		auto model = Sphere::Make<Vertex>();
+		auto model = Prism::Make<Vertex>();
 		model.Transform(dx::XMMatrixScaling(1.0f, 1.0f, 1.2f));
 		AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 

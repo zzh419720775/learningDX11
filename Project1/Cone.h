@@ -19,7 +19,7 @@ public:
 			vertices.emplace_back();
 			auto v = dx::XMVector3Transform(
 				base,
-				dx::XMMatrixRotationZ(longitudeAngle * iLong);
+				dx::XMMatrixRotationZ(longitudeAngle * iLong)
 				);
 			dx::XMStoreFloat3(&vertices.back().pos, v);
 		}
@@ -48,7 +48,7 @@ public:
 			indices.push_back(iTip);
 		}
 
-		return { std::move(vertices), std::move{indices} };
+		return { std::move(vertices), std::move(indices) };
 
 	}
 

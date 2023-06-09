@@ -32,7 +32,7 @@ public:
 				vertices.emplace_back();
 				auto v = dx::XMVector3Transform(
 					base,
-					dx::XMMatrixRotationZ(longitudeAngle * iLong);
+					dx::XMMatrixRotationZ(longitudeAngle * iLong)
 				);
 				dx::XMStoreFloat3(&vertices.back().pos, v);
 			}
@@ -41,7 +41,7 @@ public:
 				vertices.emplace_back();
 				auto v = dx::XMVector3Transform(
 					base,
-					dx::XMMatrixRotationZ(longitudeAngle * iLong);
+					dx::XMMatrixRotationZ(longitudeAngle * iLong)
 				);
 				v = dx::XMVectorAdd(v, offset);
 				dx::XMStoreFloat3(&vertices.back().pos, v);
