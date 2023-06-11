@@ -8,6 +8,7 @@ Melon::Melon(Graphics& gfx, std::mt19937& rng, std::uniform_real_distribution<fl
 	r(rdist(rng)),
 	droll(ddist(rng)),
 	dpitch(ddist(rng)),
+	dyaw(ddist(rng)),
 	dphi(odist(rng)),
 	dtheta(odist(rng)),
 	dchi(odist(rng)),

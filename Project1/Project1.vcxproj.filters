@@ -34,6 +34,9 @@
     <Filter Include="源文件\Macros">
       <UniqueIdentifier>{ff4e19de-d1b0-4fb5-a4e4-22d7b6c6f921}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Geometry">
+      <UniqueIdentifier>{83bafcf6-4d54-4bd2-96d4-a4f667abc485}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -103,10 +106,13 @@
       <Filter>源文件\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="Melon.cpp">
+      <Filter>源文件\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyramid.cpp">
+      <Filter>源文件\Drawable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,32 +191,38 @@
     <ClInclude Include="WindowsThrowMacros.h">
       <Filter>头文件\Macros</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DrawableBase.h">
       <Filter>头文件\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="IndexedTriangleList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Cone.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ChiliMath.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>头文件\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Melon.h">
+      <Filter>头文件\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>头文件\Drawable</Filter>
+    </ClInclude>
     <ClInclude Include="Plane.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Cone.h">
+      <Filter>头文件\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Prism.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexedTriangleList.h">
+      <Filter>头文件\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -235,10 +247,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="PixelShader.hlsl">
+    <FxCompile Include="ColorIndexPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="VertexShader.hlsl">
+    <FxCompile Include="ColorIndexVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="ColorBlendVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="ColorBlendPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

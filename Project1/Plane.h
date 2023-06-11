@@ -8,7 +8,7 @@
 class Plane {
 public:
 	template<class V>
-	static IndexedTriangleList<V> MakeTesslated(int divisions_x, int divisions_y) {
+	static IndexedTriangleList<V> MakeTesselated(int divisions_x, int divisions_y) {
 		namespace dx = DirectX;
 		assert(divisions_x >= 1);
 		assert(divisions_y >= 1);
@@ -61,7 +61,7 @@ public:
 
 	template<class V>
 	static IndexedTriangleList<V> Make() {
-		return MakeTesslated<V>(1, 1);
+		return MakeTesselated<V>(1, 1);
 	}
 
 };

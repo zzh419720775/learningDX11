@@ -7,7 +7,7 @@
 class Cone {
 public:
 	template<class V>
-	static IndexedTriangleList<V> MakeTesslated(int longDiv) {
+	static IndexedTriangleList<V> MakeTesselated(int longDiv) {
 		namespace dx = DirectX;
 		assert(longDiv >= 3);
 		const auto base = dx::XMVectorSet(1.0f, 0.0f, -1.0f, 0.0f);
@@ -54,6 +54,6 @@ public:
 
 	template<class V>
 	static IndexedTriangleList<V> Make() {
-		return MakeTesslated(24);
+		return MakeTesselated(24);
 	}
 };

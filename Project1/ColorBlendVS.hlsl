@@ -7,8 +7,7 @@ struct VSout {
 	float4 pos : SV_Position;
 
 };
-
-VSout main(float3 pos : Positon, float color : Color) : SV_POSITION
+VSout main(float3 pos : Position, float4 color : Color)
 {
 	VSout vso;
 	vso.pos = mul(float4(pos, 1.f), transform);

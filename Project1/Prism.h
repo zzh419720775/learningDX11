@@ -6,7 +6,7 @@
 class Prism {
 public:
 	template<class V>
-	static IndexedTriangleList<V> MakeTesslated(int longDiv) {
+	static IndexedTriangleList<V> MakeTesselated(int longDiv) {
 		namespace dx = DirectX;
 		assert(longDiv >= 3);
 
@@ -78,6 +78,6 @@ public:
 	
 	template<class V>
 	static IndexedTriangleList<V> Make() {
-		return MakeTesslated<V>(24);
+		return MakeTesselated<V>(24);
 	}
 };
