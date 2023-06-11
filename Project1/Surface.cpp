@@ -104,6 +104,7 @@ Surface Surface::FromFile(const std::string& name)
 			ss << "Loading image [" << name << "]: failed to load.";
 			throw Exception(__LINE__, __FILE__, ss.str());
 		}
+		\
 
 		width = bitmap.GetWidth();
 		height = bitmap.GetHeight();
