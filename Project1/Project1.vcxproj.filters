@@ -132,6 +132,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>源文件\Bindable</Filter>
     </ClCompile>
+    <ClCompile Include="SkinnedBox.cpp">
+      <Filter>源文件\Drawable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -256,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>头文件\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinnedBox.h">
+      <Filter>头文件\Drawable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
