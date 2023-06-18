@@ -15,6 +15,7 @@
 
 GDIPlusManager dfipm;
 
+namespace dx = DirectX;
 
 App::App():
 	wnd(800, 600, "Donkey Fart Box")
@@ -83,6 +84,7 @@ App::App():
 	
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
 
+
 }
 
 int App::Go()
@@ -105,23 +107,31 @@ App::~App()
 void App::DoFrame()
 {
 	const auto dt = timer.Mark();
-	wnd.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
+
+
+	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
+
+	wnd.Gfx().SetCamera(cam.GetMatrix());
+
 	for (auto& d : drawables)
 	{
-		d->Update(dt);
+		d->Update(wnd.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
 		d->Draw(wnd.Gfx());
 	}
-	//imgui stuff
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
+	
+	static char buffer[1024];
 
-	static bool show_demo_window = true;
-	if (show_demo_window) {
-		ImGui::ShowDemoWindow(&show_demo_window);
+	//imgui window to control simulation speed
+	if (ImGui::Begin("Simulation Speed")) {
+		ImGui::SliderFloat("Speed Factor", &speed_factor, 0.0f, 4.0f);
+		ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::Text("Status: %s", wnd.kbd.KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING(hold spacebar to pause)");
 	}
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	ImGui::End();
+
+	//imgui window to control camera
+	cam.SpawnControlWindow();
+
 
 	//present
 	wnd.Gfx().EndFrame();
