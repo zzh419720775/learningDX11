@@ -10,7 +10,7 @@ DirectX::XMMATRIX Camera::GetMatrix() const noexcept
 		dx::XMMatrixRotationRollPitchYaw( phi,-theta,0.0f )
 	);
 	return dx::XMMatrixLookAtLH(
-		pos,dx::XMVectorZero(),
+		pos, dx::XMVectorZero(),
 		dx::XMVectorSet( 0.0f,1.0f,0.0f,0.0f )
 	) * dx::XMMatrixRotationRollPitchYaw(
 		pitch,-yaw,roll
