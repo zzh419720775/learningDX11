@@ -31,9 +31,6 @@
     <Filter Include="源文件\Drawable">
       <UniqueIdentifier>{4b581f6a-5ee0-405c-8224-f4570b56ff61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Macros">
-      <UniqueIdentifier>{ff4e19de-d1b0-4fb5-a4e4-22d7b6c6f921}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\Geometry">
       <UniqueIdentifier>{83bafcf6-4d54-4bd2-96d4-a4f667abc485}</UniqueIdentifier>
     </Filter>
@@ -79,9 +76,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Bindable.cpp">
-      <Filter>源文件\Bindable</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstantBuffers.cpp">
       <Filter>源文件\Bindable</Filter>
     </ClCompile>
     <ClCompile Include="IndexBuffer.cpp">
@@ -164,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="SolidSphere.cpp">
       <Filter>源文件\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +323,9 @@
     <ClInclude Include="SolidSphere.h">
       <Filter>头文件\Drawable</Filter>
     </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
@@ -371,6 +371,12 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="SolidPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
