@@ -8,7 +8,6 @@ class PointLight {
 
 public:
 	PointLight(Graphics& gfx, float radius = 0.5);
-	PointLight() = default;
 	void SpawnControlWindow() noexcept;
 	void Reset() noexcept;
 	void Draw(Graphics& gfx) const noexcept(!IS_DEBUG);

@@ -68,7 +68,7 @@ App::~App()
 
 void App::DoFrame()
 {
-	const auto dt = timer.Mark();
+	const auto dt = timer.Mark() * speed_factor;
 
 
 	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
