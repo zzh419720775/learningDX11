@@ -123,9 +123,6 @@
     <ClCompile Include="Sampler.cpp">
       <Filter>源文件\Bindable</Filter>
     </ClCompile>
-    <ClCompile Include="Sheet.cpp">
-      <Filter>源文件\Drawable</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>源文件\Bindable</Filter>
     </ClCompile>
@@ -160,6 +157,9 @@
       <Filter>源文件\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="PointLight.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -281,9 +281,6 @@
     <ClInclude Include="Sampler.h">
       <Filter>头文件\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="Sheet.h">
-      <Filter>头文件\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>头文件\Bindable</Filter>
     </ClInclude>
@@ -325,6 +322,12 @@
     </ClInclude>
     <ClInclude Include="PointLight.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>头文件\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>头文件\Drawable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -377,6 +380,15 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="PhongPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="IndexedPhongPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="BlendedPhongVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="BlendedPhongPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
