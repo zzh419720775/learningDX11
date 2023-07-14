@@ -17,7 +17,6 @@ cbuffer ObjectCBuf
 };
 
 
-
 float4 main(float3 worldPos : Position, float3 n : Normal, float3 color : Color) : SV_Target
 {
 	// fragment to light vector data

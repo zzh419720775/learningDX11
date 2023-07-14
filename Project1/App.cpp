@@ -2,6 +2,7 @@
 #include "Box.h"
 #include "Cylinder.h"
 #include "Pyramid.h"
+#include "SkinnedBox.h"
 #include <memory>
 #include <algorithm>
 #include "ChiliMath.h"
@@ -43,6 +44,10 @@ App::App():
 					gfx, rng, adist, ddist,
 					odist, rdist, tdist
 				);
+			case 3:
+				return std::make_unique<SkinnedBox>(
+					gfx, rng, adist, ddist,
+					odist, rdist);
 			default:
 				assert(false && "impossible drawable option in factory");
 				return {}; 
@@ -52,7 +57,7 @@ App::App():
 	private:
 		Graphics& gfx;
 		std::mt19937 rng{ std::random_device{}() };
-		std::uniform_int_distribution<int> sdist{ 0 , 2 };
+		std::uniform_int_distribution<int> sdist{ 0 , 3 };
 		std::uniform_real_distribution<float> adist{ 0.0f, PI * 2.0f };
 		std::uniform_real_distribution<float> ddist{ 0.0f, PI * 0.5f };
 		std::uniform_real_distribution<float> odist{ 0.0f, PI * 0.08f };
@@ -67,6 +72,16 @@ App::App():
 	drawables.reserve(nDrawables);
 
 	std::generate_n(std::back_inserter(drawables), nDrawables, Factory{ wnd.Gfx() });
+
+	// init box pointers for editing instance parameters
+	for (auto& pd : drawables)
+	{
+		if (auto pb = dynamic_cast<Box*>(pd.get()))
+		{
+			boxes.push_back(pb);
+		}
+	}
+
 	
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
 
@@ -122,7 +137,7 @@ void App::DoFrame()
 	//imgui window to control camera and light
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
-
+	boxes.front()->SpawnControlWindow(69, wnd.Gfx());
 
 	//present
 	wnd.Gfx().EndFrame();

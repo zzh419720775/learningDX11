@@ -3,10 +3,12 @@
 #include <DirectXMath.h>
 #include "ChiliMath.h"
 
-class Prism {
+class Prism
+{
 public:
 	template<class V>
-	static IndexedTriangleList<V> MakeTesselated(int longDiv) {
+	static IndexedTriangleList<V> MakeTesselated(int longDiv)
+	{
 		namespace dx = DirectX;
 		assert(longDiv >= 3);
 
@@ -14,20 +16,20 @@ public:
 		const auto offset = dx::XMVectorSet(0.0f, 0.0f, 2.0f, 0.0f);
 		const float longitudeAngle = 2.0f * PI / longDiv;
 
-		//near center
+		// near center
 		std::vector<V> vertices;
 		vertices.emplace_back();
-		vertices.back().pos = { 0.0f, 0.0f, -1.0f };
+		vertices.back().pos = { 0.0f,0.0f,-1.0f };
 		const auto iCenterNear = (unsigned short)(vertices.size() - 1);
-
-		//far center
+		// far center
 		vertices.emplace_back();
-		vertices.back().pos = { 0.0f, 0.0f, 1.0f };
-		const auto iCenterFar = (unsigned)(vertices.size() - 1);
+		vertices.back().pos = { 0.0f,0.0f,1.0f };
+		const auto iCenterFar = (unsigned short)(vertices.size() - 1);
 
-		//base vertices
-		for (int iLong = 0; iLong < longDiv; ++iLong) {
-			//near base
+		// base vertices
+		for (int iLong = 0; iLong < longDiv; iLong++)
+		{
+			// near base
 			{
 				vertices.emplace_back();
 				auto v = dx::XMVector3Transform(
@@ -36,7 +38,7 @@ public:
 				);
 				dx::XMStoreFloat3(&vertices.back().pos, v);
 			}
-			//far base
+			// far base
 			{
 				vertices.emplace_back();
 				auto v = dx::XMVector3Transform(
@@ -48,9 +50,10 @@ public:
 			}
 		}
 
-		//side indices
+		// side indices
 		std::vector<unsigned short> indices;
-		for (unsigned short iLong = 0; iLong < longDiv; ++iLong) {
+		for (unsigned short iLong = 0; iLong < longDiv; iLong++)
+		{
 			const auto i = iLong * 2;
 			const auto mod = longDiv * 2;
 			indices.push_back(i + 2);
@@ -61,8 +64,9 @@ public:
 			indices.push_back(i + 1 + 2);
 		}
 
-		//base indices
-		for (unsigned short iLong = 0; iLong < longDiv; ++iLong) {
+		// base indices
+		for (unsigned short iLong = 0; iLong < longDiv; iLong++)
+		{
 			const auto i = iLong * 2;
 			const auto mod = longDiv * 2;
 			indices.push_back(i + 2);
@@ -73,11 +77,11 @@ public:
 			indices.push_back((i + 3) % mod + 2);
 		}
 
-		return { std::move(vertices), std::move(indices) };
+		return { std::move(vertices),std::move(indices) };
 	}
-
 	template<class V>
-	static IndexedTriangleList<V> MakeTesselatedIndependentCapNormals(int longDiv) {
+	static IndexedTriangleList<V> MakeTesselatedIndependentCapNormals(int longDiv)
+	{
 		namespace dx = DirectX;
 		assert(longDiv >= 3);
 
@@ -186,12 +190,9 @@ public:
 
 		return { std::move(vertices),std::move(indices) };
 	}
-	
 	template<class V>
-	static IndexedTriangleList<V> Make() {
+	static IndexedTriangleList<V> Make()
+	{
 		return MakeTesselated<V>(24);
 	}
-
-
-
 };
